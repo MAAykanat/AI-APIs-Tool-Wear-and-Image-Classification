@@ -54,6 +54,7 @@ df_test = df.drop(["TARGET"], axis=1)
 single_input = df_test.iloc[0].to_numpy().reshape(1, -1)
 # single_input = np.array([159.0, 0.825, 50.0, 159.0, 0.615).reshape(1, -1)
 print('Input:', single_input)
+print('Input shape:', single_input.shape)
 print('Prediction:', pipeline.predict(single_input))
 
 # Save the model
