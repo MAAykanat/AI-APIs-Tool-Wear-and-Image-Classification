@@ -1,5 +1,5 @@
 import numpy as np
-from models import CNCMachine
+from models import RequestCNCMachine, UpdateCNCMachine
 
 def predict_tool_wear(estimator, request):
     
@@ -77,7 +77,7 @@ def predict_tool_wear(estimator, request):
     return prediction[0] 
 
 def insert_machine_status(request, prediction, client_ip, db):
-    new_machine_status = CNCMachine(
+    new_machine_status = UpdateCNCMachine(
         X1_ACTUALPOSITION=request["X1_ACTUALPOSITION"],
         X1_ACTUALVELOCITY=request["X1_ACTUALVELOCITY"],
         X1_ACTUALACCELERATION=request["X1_ACTUALACCELERATION"],

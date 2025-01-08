@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends, Request
-from models import CNCMachine
+from models import RequestCNCMachine, UpdateCNCMachine
 
 import numpy as np
 
@@ -20,7 +20,7 @@ def read_root():
 
 # Define the endpoint for the prediction
 @app.post("/predict/toolwear")
-async def predict_tool_wear_status(request: CNCMachine):
+async def predict_tool_wear_status(request: RequestCNCMachine):
     prediction = predict_tool_wear(estimator_toolwear, request.dict())
     
     # Convert numpy types to native Python types
@@ -35,7 +35,7 @@ async def predict_tool_wear_status(request: CNCMachine):
 
 # Define the endpoint for the prediction and insert result into the database
 @app.post("/predict_and_insert/toolwear")
-async def predict_tool_wear_and_insert(request: CNCMachine, fastapi_req:Request, db: Session = Depends(get_db)):
+async def predict_tool_wear_and_insert(request: RequestCNCMachine, fastapi_req:Request, db: Session = Depends(get_db)):
     prediction = predict_tool_wear(estimator_toolwear, request.dict())
     
     # Convert numpy types to native Python types
