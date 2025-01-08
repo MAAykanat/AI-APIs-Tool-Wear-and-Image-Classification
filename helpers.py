@@ -76,7 +76,7 @@ def predict_tool_wear(estimator, request):
 
     return prediction[0] 
 
-def insert_machine_status(request, prediction, client_ip, db):
+def insert_machine_status(request, db):
     new_machine_status = UpdateCNCMachine(
         X1_ACTUALPOSITION=request["X1_ACTUALPOSITION"],
         X1_ACTUALVELOCITY=request["X1_ACTUALVELOCITY"],
@@ -124,9 +124,7 @@ def insert_machine_status(request, prediction, client_ip, db):
         S1_SYSTEMINERTIA=request["S1_SYSTEMINERTIA"],
         M1_CURRENT_PROGRAM_NUMBER=request["M1_CURRENT_PROGRAM_NUMBER"],
         M1_SEQUENCE_NUMBER=request["M1_SEQUENCE_NUMBER"],
-        M1_CURRENT_FEEDRATE=request["M1_CURRENT_FEEDRATE"],
-        prediction=prediction,
-        client_ip=client_ip
+        M1_CURRENT_FEEDRATE=request["M1_CURRENT_FEEDRATE"]
     )
 
     with db as session:

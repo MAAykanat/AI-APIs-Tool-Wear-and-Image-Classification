@@ -47,8 +47,6 @@ async def predict_tool_wear_and_insert(request: RequestCNCMachine, fastapi_req:R
         prediction = float(prediction)
     
     # Insert the prediction into the database
-    db_insert_record = insert_machine_status(request=request.dict(), prediction=prediction,
-                                          client_ip=fastapi_req.client.host,
-                                          db=db)
+    db_insert_record = insert_machine_status(request=request.dict(), db=db)
     
     return {"prediction": prediction, "db_record": db_insert_record}
