@@ -4,7 +4,7 @@ from sqlmodel import Field, SQLModel
 from datetime import datetime
 
 
-class RequestCNCMachine(BaseModel):
+class RequestCNCMachine(SQLModel):
 
     X1_ACTUALPOSITION:             float
     X1_ACTUALVELOCITY:             float
@@ -158,6 +158,6 @@ class UpdateCNCMachine(SQLModel, table=True):
     M1_CURRENT_PROGRAM_NUMBER:     float
     M1_SEQUENCE_NUMBER:            float
     M1_CURRENT_FEEDRATE:           float
-    prediction:                    float
-    # predction_time: datetime = Field(default_factory=datetime.utcnow, nullable=False)
-    client_ip:                     str
+    # prediction:                    float
+    # prediction_time: datetime = Field(default_factory=datetime.utcnow, nullable=False)
+    # client_ip:                     str
