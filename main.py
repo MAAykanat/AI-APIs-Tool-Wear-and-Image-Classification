@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 from helpers import predict_tool_wear, insert_machine_status
-from config import estimator_toolwear
+from config import estimator_toolwear, dataset_save_path
 from database import create_db_and_tables, get_db
 from sqlmodel import Session
 
@@ -63,10 +63,10 @@ async def download_toolwear_data(db: Session = Depends(get_db)):
     df = pd.DataFrame([record.dict() for record in records])
     
     # Define the file path
-    file_path = "/home/train/datasets/current_machine_status_data.csv"
+    # file_path = "/home/train/datasets/current_machine_status_data.csv"
     
     # Save the DataFrame as a CSV file
-    df.to_csv(file_path, index=False)
+    df.to_csv(dataset_save_path, index=False)
     
     # Return the CSV file as a download response
-    return FileResponse(file_path, media_type='text/csv', filename=file_path)
+    return FileResponse(dataset_save_path, media_type='text/csv', filename=dataset_save_path)
