@@ -1,5 +1,8 @@
 import numpy as np
+import pandas as pd
 from models import RequestCNCMachine, UpdateCNCMachine
+from io import StringIO
+import os
 
 def predict_tool_wear(estimator, request):
     
@@ -135,3 +138,24 @@ def insert_machine_status(request, prediction, client_ip, db):
         session.refresh(new_machine_status)
     
     return new_machine_status
+
+# Define the function to fetch data from SQL and generate a CSV using Pandas
+def download_from_sql_with_pandas(db):
+    # Example query to fetch data (modify as needed)
+    query = "SELECT * FROM machine_status"
+    
+    # Use Pandas to fetch data from the database
+    df = pd.read_sql(query, db.bind)  # db.bind provides the database connection
+
+    # Define the dataset folder and file path
+    dataset_folder = "dataset"
+    file_name = "current_machine_status_dataset.csv"
+    file_path = os.path.join(dataset_folder, file_name)
+
+    # Ensure the dataset folder exists
+    os.makedirs(dataset_folder, exist_ok=True)
+
+    # Save the DataFrame to a CSV file in the dataset folder
+    df.to_csv(file_path, index=False)
+
+    return print("Data downloaded successfully to:", file_path)

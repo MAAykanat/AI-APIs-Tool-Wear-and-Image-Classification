@@ -1,13 +1,13 @@
 from fastapi import FastAPI, Depends, Request
+from fastapi.responses import StreamingResponse
 from models import RequestCNCMachine, UpdateCNCMachine
 
 import numpy as np
 
-from helpers import predict_tool_wear, insert_machine_status
+from helpers import predict_tool_wear, insert_machine_status, download_from_sql_with_pandas
 from config import estimator_toolwear
 from database import create_db_and_tables, get_db
 from sqlmodel import Session
-
 
 app = FastAPI()
 
@@ -52,3 +52,14 @@ async def predict_tool_wear_and_insert(request: RequestCNCMachine, fastapi_req:R
                                           db=db)
     
     return {"prediction": prediction, "db_record": db_insert_record}
+
+# Create an endpoint to download the data as a CSV
+@app.get("/download/toolwear-data")
+async def download_toolwear_data(db: Session = Depends(get_db)):
+    csv_file = download_from_sql_with_pandas(db)
+    response = StreamingResponse(
+        csv_file,
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=toolwear_data.csv"},
+    )
+    return response
