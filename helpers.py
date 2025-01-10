@@ -142,7 +142,7 @@ def insert_machine_status(request, prediction, client_ip, db):
 # Define the function to fetch data from SQL and generate a CSV using Pandas
 def download_from_sql_with_pandas(db):
     # Example query to fetch data (modify as needed)
-    query = "SELECT * FROM machine_status"
+    query = "SELECT * FROM updatecncmachine"
     
     # Use Pandas to fetch data from the database
     df = pd.read_sql(query, db.bind)  # db.bind provides the database connection
