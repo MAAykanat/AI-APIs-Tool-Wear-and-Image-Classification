@@ -139,23 +139,3 @@ def insert_machine_status(request, prediction, client_ip, db):
     
     return new_machine_status
 
-# Define the function to fetch data from SQL and generate a CSV using Pandas
-def download_from_sql_with_pandas(db):
-    # Example query to fetch data (modify as needed)
-    query = "SELECT * FROM updatecncmachine"
-    
-    # Use Pandas to fetch data from the database
-    df = pd.read_sql(query, db.bind)  # db.bind provides the database connection
-
-    # Define the dataset folder and file path
-    dataset_folder = "dataset"
-    file_name = "current_machine_status_dataset.csv"
-    file_path = os.path.join(dataset_folder, file_name)
-
-    # Ensure the dataset folder exists
-    os.makedirs(dataset_folder, exist_ok=True)
-
-    # Save the DataFrame to a CSV file in the dataset folder
-    df.to_csv(file_path, index=False)
-
-    return print("Data downloaded successfully to:", file_path)
