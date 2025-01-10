@@ -5,7 +5,7 @@ from models import RequestCNCMachine, UpdateCNCMachine
 import numpy as np
 import pandas as pd
 
-from helpers import predict_tool_wear, insert_machine_status, download_from_sql_with_pandas
+from helpers import predict_tool_wear, insert_machine_status
 from config import estimator_toolwear
 from database import create_db_and_tables, get_db
 from sqlmodel import Session
