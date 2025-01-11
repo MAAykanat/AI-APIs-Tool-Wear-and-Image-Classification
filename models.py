@@ -212,7 +212,7 @@ class CNCMachineTrain(SQLModel,table=True):
     M1_CURRENT_FEEDRATE:           float
     TARGET:                        float
 
-class CNCMachineDriftInput(SQLModel, table=True):
+class CNCMachineDriftInput(SQLModel):
     n_days_before: int
 
     class Config:
