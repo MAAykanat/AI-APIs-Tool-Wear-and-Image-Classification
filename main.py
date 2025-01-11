@@ -99,9 +99,7 @@ async def detect_drifting(request: CNCMachineDriftInput):
     train_df = pd.read_sql("select * from cncmachinetrain", engine)
 
     # Select predicted data from last n days
-    prediction_df = pd.read_sql(f"""select * from updatecncmachine 
-                                    where prediction_time >
-                                    current_date - {request.n_days_before}""", engine)
+    prediction_df = pd.read_sql(f"select * from updatecncmachine where prediction_time > current_date - {request.n_days_before}", engine)
 
     # Get the common columns between train and prediction dataframes
     columns_to_check = [column for column in train_df.columns if column in prediction_df.columns]
