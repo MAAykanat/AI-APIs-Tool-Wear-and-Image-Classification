@@ -13,21 +13,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet">
-    <meta name="title" content="Image Recognition App using FastAPI and PyTorch | By Bhimraj Yadav">
-    <meta name="description" content="Image Recognition App using FastAPI and PyTorch | By Bhimraj Yadav">
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fastapi-pytorch-app.herokuapp.com/">
-    <meta property="og:title" content="Image Recognition App using FastAPI and PyTorch | By Bhimraj Yadav">
-    <meta property="og:description" content="Image Recognition App using FastAPI and PyTorch | By Bhimraj Yadav">
-    <meta property="og:image" content="https://fastapi-pytorch-app.herokuapp.com/static/images/landing-page.png">
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://academy-bhimraj-com-np.vercel.app">
-    <meta property="twitter:title" content="Image Recognition App using FastAPI and PyTorch | By Bhimraj Yadav">
-    <meta property="twitter:description" content="Image Recognition App using FastAPI and PyTorch | By Bhimraj Yadav">
-    <meta property="twitter:image" content="https://fastapi-pytorch-app.herokuapp.com/static/images/landing-page.png">
     <link rel="canonical" href="/">
-    <link rel="icon" type="image/png" href="{{ url_for('static', path='/icons/icon.png') }}" />
+    <link rel="icon" type="image/png" href="{{ url_for('static', path='/icon.png') }}" />
 </head>
 
 <body class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12" style="font-family: Poppins;">
@@ -41,13 +29,13 @@
             <div class="flex flex-col space-y-2 items-center">
                 <h1 class="font-bold text-center flex flex-col">
                     <span
-                        class="text-6xl text-transparent bg-clip-text bg-gradient-to-br from-blue-400 via-purple-600 to-indigo-400">FastAPI</span>
+                        class="text-3xl text-transparent bg-clip-text bg-gradient-to-br from-blue-400 via-purple-600 to-indigo-400">VBO-MLOps</span>
                     <div class="flex flex-row items-center justify-center space-x-1 flex-shrink-0">
-                        <img class="h-8 w-8" src="{{ url_for('static', path='/icons/icon-128x128.png') }}" alt="logo">
-                        <span class="text-2xl font-medium text-blue-600">PyTorch App</span>
+                        <img class="h-10 w-10" src="{{ url_for('static', path='/icon2.png') }}" alt="logo">
+                        <span class="text-2xl font-medium text-blue-600"> Image Recognition App </span>
                     </div>
                 </h1>
-                <small class="text-gray-600 text-sm font-light"> An Image Recognition App</small>
+                <small class="text-gray-600 text-sm font-light"> Pretrained DenseNet121 ImageNet App </small>
             </div>
 
             <!-- Center Body Part -->
@@ -98,14 +86,13 @@
                 {% endif %}
             </div>
             <div class="mt-3">
-                <div class="items-center flex flex-shrink-0 justify-center"><span>Made with </span>
+                <div class="items-center flex flex-shrink-0 justify-center"><span>Try it out</span>
                     <span class="text-pink-600 px-1"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
                                 clip-rule="evenodd"></path>
                         </svg></span>
-                    <span class="font-medium text-blue-600 hover:text-blue-700">By Bhimraj Yadav</span>
                 </div>
             </div>
         </div>
