@@ -19,4 +19,4 @@ spec:
         image: ml-prediction-with-fastapi:1.0
         imagePullPolicy: Never
         ports:
-        - containerPort: 8502
+        - containerPort: 8000
