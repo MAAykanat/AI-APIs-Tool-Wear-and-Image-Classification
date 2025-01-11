@@ -160,3 +160,54 @@ class UpdateCNCMachine(SQLModel, table=True):
     M1_CURRENT_FEEDRATE:           float
     prediction:                    float
     client_ip:                     str
+
+class CNCMachineTrain(SQLModel,table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    X1_ACTUALPOSITION:             float
+    X1_ACTUALVELOCITY:             float
+    X1_ACTUALACCELERATION:         float
+    X1_COMMANDPOSITION:            float
+    X1_COMMANDVELOCITY:            float
+    X1_COMMANDACCELERATION:        float
+    X1_CURRENTFEEDBACK:            float
+    X1_DCBUSVOLTAGE:               float
+    X1_OUTPUTCURRENT:              float
+    X1_OUTPUTVOLTAGE:              float
+    X1_OUTPUTPOWER:                float
+    Y1_ACTUALPOSITION:             float
+    Y1_ACTUALVELOCITY:             float
+    Y1_ACTUALACCELERATION:         float
+    Y1_COMMANDPOSITION:            float
+    Y1_COMMANDVELOCITY:            float
+    Y1_COMMANDACCELERATION:        float
+    Y1_CURRENTFEEDBACK:            float
+    Y1_DCBUSVOLTAGE:               float
+    Y1_OUTPUTCURRENT:              float
+    Y1_OUTPUTVOLTAGE:              float
+    Y1_OUTPUTPOWER:                float
+    Z1_ACTUALPOSITION:             float
+    Z1_ACTUALVELOCITY:             float
+    Z1_ACTUALACCELERATION:         float
+    Z1_COMMANDPOSITION:            float
+    Z1_COMMANDVELOCITY:            float
+    Z1_COMMANDACCELERATION:        float
+    Z1_CURRENTFEEDBACK:            float
+    Z1_DCBUSVOLTAGE:               float
+    Z1_OUTPUTCURRENT:              float
+    Z1_OUTPUTVOLTAGE:              float
+    S1_ACTUALPOSITION:             float
+    S1_ACTUALVELOCITY:             float
+    S1_ACTUALACCELERATION:         float
+    S1_COMMANDPOSITION:            float
+    S1_COMMANDVELOCITY:            float
+    S1_COMMANDACCELERATION:        float
+    S1_CURRENTFEEDBACK:            float
+    S1_DCBUSVOLTAGE:               float
+    S1_OUTPUTCURRENT:              float
+    S1_OUTPUTVOLTAGE:              float
+    S1_OUTPUTPOWER:                float
+    S1_SYSTEMINERTIA:              float
+    M1_CURRENT_PROGRAM_NUMBER:     float
+    M1_SEQUENCE_NUMBER:            float
+    M1_CURRENT_FEEDRATE:           float
+    TARGET:                        float

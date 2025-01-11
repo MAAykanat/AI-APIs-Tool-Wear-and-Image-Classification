@@ -20,9 +20,21 @@ templates = Jinja2Templates(directory="templates")
 # Creates all the tables defined in models module
 create_db_and_tables()
 
+# Home page
 @app.get("/")
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+# Imagenet prediction endpoint
+@app.post("/")
+async def home_imagenet_predict(request: Request, file: UploadFile = File(...)):
+    result = None
+    error = None
+    try:
+        result = get_result(image_file=file)
+    except Exception as ex:
+        error = ex
+    return templates.TemplateResponse("index.html", {"request": request, "result": result , "error": error})
 
 # Define the endpoint for the prediction
 @app.post("/predict/toolwear")
@@ -76,12 +88,3 @@ async def download_toolwear_data(db: Session = Depends(get_db)):
     # Return the CSV file as a download response
     return FileResponse(dataset_save_path, media_type='text/csv', filename=dataset_save_path)
 
-@app.post("/")
-async def home_predict(request: Request, file: UploadFile = File(...)):
-    result = None
-    error = None
-    try:
-        result = get_result(image_file=file)
-    except Exception as ex:
-        error = ex
-    return templates.TemplateResponse("index.html", {"request": request, "result": result , "error": error})
