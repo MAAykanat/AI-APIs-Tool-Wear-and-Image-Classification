@@ -204,7 +204,7 @@ def insert_train_data_to_db():
     df_train.columns = df_train.columns.str.upper()
 
     df_train["TARGET"] = df_train["TARGET"].apply(lambda x: 1 if x == "worn" else 0) # Convert to binary
-    df_train.drop(["EXP_NO","MACHINING_PROCESS"], axis=1, inplace=True) # Drop the experiment number amd machining status column
+    # df_train.drop(["EXP_NO","MACHINING_PROCESS"], axis=1, inplace=True) # Drop the experiment number amd machining status column
 
     # Insert the data into the database
     with Session(engine) as session:
