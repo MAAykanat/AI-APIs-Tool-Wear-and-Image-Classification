@@ -12,8 +12,6 @@ from config import estimator_toolwear, dataset_save_path
 from database import create_db_and_tables, get_db
 from sqlmodel import Session
 
-import insert_train_data_to_db
-
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
