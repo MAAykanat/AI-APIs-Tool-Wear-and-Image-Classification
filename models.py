@@ -159,6 +159,7 @@ class UpdateCNCMachine(SQLModel, table=True):
     M1_SEQUENCE_NUMBER:            float
     M1_CURRENT_FEEDRATE:           float
     prediction:                    float
+    prediction_time: datetime = Field(default_factory=datetime.utcnow, nullable=False)
     client_ip:                     str
 
 class CNCMachineTrain(SQLModel,table=True):
