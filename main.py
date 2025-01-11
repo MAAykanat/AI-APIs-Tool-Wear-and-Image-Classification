@@ -1,23 +1,28 @@
-from fastapi import FastAPI, Depends, Request
+from fastapi import FastAPI, Depends, Request, File, UploadFile
 from fastapi.responses import FileResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from models import RequestCNCMachine, UpdateCNCMachine
 
 import numpy as np
 import pandas as pd
 
-from helpers import predict_tool_wear, insert_machine_status
+from helpers import * 
 from config import estimator_toolwear, dataset_save_path
 from database import create_db_and_tables, get_db
 from sqlmodel import Session
 
 app = FastAPI()
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
 # Creates all the tables defined in models module
 create_db_and_tables()
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 # Define the endpoint for the prediction
 @app.post("/predict/toolwear")
@@ -70,3 +75,13 @@ async def download_toolwear_data(db: Session = Depends(get_db)):
     
     # Return the CSV file as a download response
     return FileResponse(dataset_save_path, media_type='text/csv', filename=dataset_save_path)
+
+@app.post("/")
+async def home_predict(request: Request, file: UploadFile = File(...)):
+    result = None
+    error = None
+    try:
+        result = get_result(image_file=file)
+    except Exception as ex:
+        error = ex
+    return templates.TemplateResponse("index.html", {"request": request, "result": result , "error": error})

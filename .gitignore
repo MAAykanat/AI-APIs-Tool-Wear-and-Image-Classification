@@ -2,3 +2,6 @@
 .idea
 .env
 __pycache__
+/dataset/flower_photos
+/dataset/train_flower
+/dataset/test_flower
