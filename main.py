@@ -12,6 +12,8 @@ from config import estimator_toolwear, dataset_save_path
 from database import create_db_and_tables, get_db
 from sqlmodel import Session
 
+import insert_train_data_to_db
+
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -88,3 +90,7 @@ async def download_toolwear_data(db: Session = Depends(get_db)):
     # Return the CSV file as a download response
     return FileResponse(dataset_save_path, media_type='text/csv', filename=dataset_save_path)
 
+@app.post("/load/train-data-to-db")
+async def load_train_data_to_db():
+    insert_train_data_to_db()
+    return {"message": "Train data loaded successfully!"}
