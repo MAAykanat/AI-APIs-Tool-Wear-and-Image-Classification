@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, Request, File, UploadFile
 from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from models import RequestCNCMachine, UpdateCNCMachine
+from models import RequestCNCMachine, UpdateCNCMachine, CNCMachineDriftInput
 
 import numpy as np
 import pandas as pd
@@ -92,3 +92,24 @@ async def download_toolwear_data(db: Session = Depends(get_db)):
 async def load_train_data_to_db():
     insert_train_data_to_db()
     return {"message": "Train data loaded successfully!"}
+
+@app.post("/drift/CNCMachine-drift-detect")
+async def detect_drifting(request: CNCMachineDriftInput):
+    # Select training data
+    train_df = pd.read_sql("select * from cncmachinetrain", engine)
+
+    # Select predicted data from last n days
+    prediction_df = pd.read_sql(f"""select * from updatecncmachine 
+                                    where prediction_time >
+                                    current_date - {request.n_days_before}""", engine)
+
+    # Get the common columns between train and prediction dataframes
+    columns_to_check = [column for column in train_df.columns if column in prediction_df.columns]
+    
+    drift_results = {}
+    
+    # Loop through the columns and check drift for each
+    for column in columns_to_check:
+        drift_results[f'{column}_drift'] = detect_drift(train_df[column], prediction_df[column])
+    
+    return drift_results

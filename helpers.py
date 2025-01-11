@@ -16,6 +16,8 @@ from database import engine
 from sqlmodel import Session
 
 from config import df_train
+from scipy.stats import ks_2samp
+
 
 # model 
 model = models.densenet121(pretrained=True)
@@ -219,4 +221,11 @@ def insert_train_data_to_db():
             # Commit the session to save the records
             session.commit()
 
+# Object agnostic drift detection function
+def detect_drift(data1, data2):
+    ks_result = ks_2samp(data1, data2)
+    if ks_result.pvalue < 0.05:
+        return "Drift exits"
+    else:
+        return "No drift"
 

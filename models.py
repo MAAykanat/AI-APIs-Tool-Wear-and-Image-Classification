@@ -211,3 +211,13 @@ class CNCMachineTrain(SQLModel,table=True):
     M1_SEQUENCE_NUMBER:            float
     M1_CURRENT_FEEDRATE:           float
     TARGET:                        float
+
+class CNCMachineDriftInput(SQLModel, table=True):
+    n_days_before: int
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "n_days_before": 5,
+            }
+        }
