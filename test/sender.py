@@ -9,7 +9,7 @@ HOST = 'localhost'  # IP of the machine running Script 2
 PORT = 5        # Port to connect to Script 2
 
 # Load and preprocess the dataset
-df = pd.read_csv("dataset/test.csv")
+df = pd.read_csv("../dataset/test.csv")
 df.columns = df.columns.str.upper()
 df["TARGET"] = df["TARGET"].apply(lambda x: 1 if x == "worn" else 0)  # Convert to binary
 df.drop(["EXP_NO", "MACHINING_PROCESS", "TARGET"], axis=1, inplace=True)  # Drop unnecessary columns
